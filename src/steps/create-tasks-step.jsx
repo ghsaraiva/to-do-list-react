@@ -1,6 +1,7 @@
+import { PlusIcon } from "@heroicons/react/24/outline"
 
 
-function CreateTasksStep({ changeInputTask, changeInputDescription, task, description }) {
+function CreateTasksStep({ addItem, changeInputTask, changeInputDescription, task, description }) {
 
     return (
         <div className="w-[600px] space-y-2">
@@ -24,6 +25,10 @@ function CreateTasksStep({ changeInputTask, changeInputDescription, task, descri
                     placeholder="Descrição da tarefa"
                     className="bg-zinc-900 text-lg placeholder-zinc-600 outline-none border-none focus:ring-0 focus:border-transparent focus:placeholder-zinc-800 w-full" />
             </div>
+            <button onClick={addItem} className="bg-teal-500 text-teal-950 hover:bg-teal-600 rounded-lg px-10 py-2.5 flex items-center justify-center gap-2 transition-all w-full">
+                <PlusIcon className="size-5" />
+                Adicionar Tarefa
+            </button>
         </div>
     )
 }

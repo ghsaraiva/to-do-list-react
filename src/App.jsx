@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { createElement, useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import CreateTasksStep from "./steps/create-tasks-step";
 import EditTaskModal from "./steps/edit-task-modal";
 import CompleteAndDeleteTaskStep from "./steps/complete-and-delete-task-step";
-import { PlusIcon } from "@heroicons/react/24/outline";
 import SearchStep from "./steps/search-step";
 import FiltersStep from "./steps/filters-step";
+import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 
 function App() {
   const [task, setTask] = useState('')
@@ -15,6 +15,7 @@ function App() {
   const [currentTask, setCurrentTask] = useState(null)
   const [search, setSearch] = useState('')
   const [filter, setFilter] = useState('all')
+  const [alert, setAlert] = useState(false)
 
   function changeInputTask(event) {
     const taskValue = event.target.value;
@@ -28,13 +29,13 @@ function App() {
 
   function addItem() {
     if (!task) {
-      return (
-        window.alert("teste")
-      )
+      setAlert(true)
+      return
     }
     setItemsList([{ id: uuidv4(), task, description, isCompleted: false }, ...itemsList]);
     setTask('');
     setDescription('');
+    setAlert(false)
   }
 
   function markAsComplete(id) {
@@ -77,12 +78,14 @@ function App() {
       <div className="space-y-14 block">
         <div className="flex items-center justify-between">
           <p className="text-2xl text-zinc-300">Lista de Tarefas</p>
-          <button onClick={addItem} className="bg-teal-500 text-teal-950 hover:bg-teal-600 rounded-lg px-5 py-2 flex items-center justify-center gap-2 transition-all">
-            <PlusIcon className="size-5" />
-            Adicionar Tarefa
-          </button>
         </div>
 
+        {alert && (
+          <div className="bg-red-300 text-red-950 font-semi-bold px-2 py-3 gap-2 rounded flex items-center" role="alert">
+            <ExclamationCircleIcon className="size-5" />
+            <span className="block sm:inline"> Digite o título da tarefa!</span>
+          </div>
+        )}
 
         <div className="flex justify-between items-center">
 
@@ -99,6 +102,7 @@ function App() {
         </div>
 
         <CreateTasksStep
+          addItem={addItem}
           changeInputTask={changeInputTask}
           changeInputDescription={changeInputDescription}
           task={task}
