@@ -8,7 +8,7 @@ function CompleteAndDeleteTaskStep({ deleteItem, itemsList, markAsComplete, open
                     .filter((item) => item.task.toLowerCase().includes(search.toLowerCase()))
                     .filter((item) => filter === "all" ? true : filter === "completed" ? item.isCompleted : !item.isCompleted)
                     .map((item) => (
-                        <div key={item.id} className={`flex items-center gap-3 p-4 rounded-lg ${item.isCompleted ? "bg-lime-950 text-lime-900" : "bg-zinc-900 text-zinc-400"} w-full`}>
+                        <div key={item.id} className={`flex items-center gap-3 p-4 rounded-lg text-center ${item.isCompleted ? "bg-lime-950 text-lime-900" : "bg-zinc-900 text-zinc-400"} w-full`}>
                             <button title="Concluir tarefa" onClick={() => markAsComplete(item.id)}>
                                 <CheckBadgeIcon className={`w-7 h-7 ${item.isCompleted ? "text-lime-400" : "text-zinc-400 hover:text-zinc-50"}`} />
                             </button>
