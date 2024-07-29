@@ -14,7 +14,7 @@ function CompleteAndDeleteTaskStep({ deleteItem, itemsList, markAsComplete, open
                             </button>
                             <li className="flex-1">
                                 <p>{item.task}</p>
-                                <p className={`text-xs ${item.isCompleted ? "text-lime-900" : "text-zinc-400"} text-wrap max-w-full`}>{item.description}</p>
+                                <p className={`text-xs ${item.isCompleted ? "text-lime-900" : "text-zinc-500"} text-wrap max-w-full`}>{item.description}</p>
                             </li>
                             <button onClick={() => openTaskModal(item)}>
                                 <PencilSquareIcon title="Editar tarefa" className={`w-7 h-7 ${item.isCompleted ? "hover:text-zinc-500" : "text-zinc-400 hover:text-zinc-50"}`} />
