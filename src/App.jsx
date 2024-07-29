@@ -1,11 +1,11 @@
-import { createElement, useState } from "react";
-import { v4 as uuidv4 } from 'uuid';
-import CreateTasksStep from "./steps/create-tasks-step";
-import EditTaskModal from "./steps/edit-task-modal";
-import CompleteAndDeleteTaskStep from "./steps/complete-and-delete-task-step";
-import SearchStep from "./steps/search-step";
-import FiltersStep from "./steps/filters-step";
-import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
+import { useState } from "react"
+import { v4 as uuidv4 } from 'uuid'
+import CreateTasksStep from "./steps/create-tasks-step"
+import EditTaskModal from "./steps/edit-task-modal"
+import CompleteAndDeleteTaskStep from "./steps/complete-and-delete-task-step"
+import SearchStep from "./steps/search-step"
+import FiltersStep from "./steps/filters-step"
+import { ExclamationCircleIcon } from "@heroicons/react/24/outline"
 
 function App() {
   const [task, setTask] = useState('')
@@ -18,13 +18,13 @@ function App() {
   const [alert, setAlert] = useState(false)
 
   function changeInputTask(event) {
-    const taskValue = event.target.value;
-    setTask(taskValue);
+    const taskValue = event.target.value
+    setTask(taskValue)
   }
 
   function changeInputDescription(event) {
-    const descriptionValue = event.target.value;
-    setDescription(descriptionValue);
+    const descriptionValue = event.target.value
+    setDescription(descriptionValue)
   }
 
   function addItem() {
@@ -32,52 +32,52 @@ function App() {
       setAlert(true)
       return
     }
-    setItemsList([{ id: uuidv4(), task, description, isCompleted: false }, ...itemsList]);
-    setTask('');
-    setDescription('');
+    setItemsList([{ id: uuidv4(), task, description, isCompleted: false }, ...itemsList])
+    setTask('')
+    setDescription('')
     setAlert(false)
   }
 
   function markAsComplete(id) {
     const checkedItems = itemsList.map((item) =>
       item.id === id ? { ...item, isCompleted: !item.isCompleted } : item
-    );
-    setItemsList(checkedItems);
+    )
+    setItemsList(checkedItems)
   }
 
   function deleteItem(id) {
-    const deletedItems = itemsList.filter((item) => item.id !== id);
-    setItemsList(deletedItems);
+    const deletedItems = itemsList.filter((item) => item.id !== id)
+    setItemsList(deletedItems)
   }
 
   function openTaskModal(item) {
-    setCurrentTask(item);
-    setEditTaskModal(true);
+    setCurrentTask(item)
+    setEditTaskModal(true)
   }
 
   function closeTaskModal() {
-    setEditTaskModal(false);
-    setCurrentTask(null);
+    setEditTaskModal(false)
+    setCurrentTask(null)
   }
 
   function handleEditTask() {
     const updatedTasks = itemsList.map((item) =>
       item.id === currentTask.id ? { ...item, task: currentTask.task, description: currentTask.description } : item
-    );
-    setItemsList(updatedTasks);
-    closeTaskModal();
+    )
+    setItemsList(updatedTasks)
+    closeTaskModal()
   }
 
   function changeEditTask(event) {
-    const { name, value } = event.target;
-    setCurrentTask({ ...currentTask, [name]: value });
+    const { name, value } = event.target
+    setCurrentTask({ ...currentTask, [name]: value })
   }
 
   return (
-    <div className="md:container md:mx-auto flex justify-center items-center h-screen mt-10 bg-pattern bg-no-repeat bg-center">
+    <div className="md:container md:mx-auto flex min-h-screen justify-center items-center h-screen mt-10 bg-pattern bg-no-repeat bg-center">
       <div className="space-y-14 block">
-        <div className="flex items-center justify-between">
-          <p className="text-2xl text-zinc-300">Lista de Tarefas</p>
+        <div className="flex items-center border-b border-b-zinc-500 justify-center">
+          <p className="text-2xl text-zinc-300 mb-2">Lista de Tarefas</p>
         </div>
 
         {alert && (
@@ -87,7 +87,7 @@ function App() {
           </div>
         )}
 
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center gap-5">
 
           <FiltersStep
             filter={filter}
@@ -129,7 +129,7 @@ function App() {
 
       </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
